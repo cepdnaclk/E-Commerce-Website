@@ -1,4 +1,4 @@
-<!-- Special Price -->
+  <!-- Special Price -->
 <?php
     $brand = array_map(function ($pro){ return $pro['item_brand']; }, $product_shuffle);
     $unique = array_unique($brand);
