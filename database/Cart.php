@@ -12,7 +12,7 @@ class Cart
     }
 
     // insert into cart table
-    public  function insertIntoCart($params = null, $table = "cart"){
+    public  function insertIntoCart($params = null, $table = "cart_items"){
         if ($this->db->con != null){
             if ($params != null){
                 // "Insert into cart(user_id) values (0)"
@@ -30,13 +30,27 @@ class Cart
             }
         }
     }
+    public function getCart($CartID = null, $table= 'cart_items'){
+        if (isset($CartID)){
+            $result = $this->db->con->query("SELECT * FROM {$table} WHERE CartID={$CartID}");
+            $resultArray = array();
 
+            // fetch product data one by one
+            while ($item = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                $resultArray[] = $item;
+            }
+            return $resultArray;
+        }
+    }
     // to get user_id and item_id and insert into cart table
-    public  function addToCart($userid, $itemid){
+    public  function addToCart($userid, $itemid,$qty,$price){
         if (isset($userid) && isset($itemid)){
+            $CartID = $this->makeCart($userid);
             $params = array(
-                "user_id" => $userid,
-                "item_id" => $itemid
+                "CartID" => $CartID,
+                "ProductID" => $itemid,
+                "Qty" => $qty,
+                "Price" => $price
             );
 
             // insert data into cart
@@ -44,14 +58,44 @@ class Cart
             if ($result){
                 // Reload Page
                 header("Location: " . $_SERVER['PHP_SELF']);
+            }else{
+                echo 'Something went wrong!';
             }
         }
     }
 
+    //create cart and add data to cart Items
+    public function makeCart($CustomerID,$table='cart')
+    {
+        if (isset($CustomerID)) {
+            $result = $this->db->con->query("SELECT * FROM {$table} WHERE CustomerID={$CustomerID}");
+            if ($result->num_rows>0) {
+                $row = $result->fetch_assoc();
+                return $row['CartID'];
+
+            } else {
+                $seg = $this->db->con->query("INSERT INTO {$table} (CustomerID) VALUES ({$CustomerID})");
+
+                if ($seg) {
+                    $row = $seg->fetch_assoc();
+                    return $row['CartID'];
+
+                } else {
+                    echo 'Something Went Wrong!';
+                }
+            }
+
+        }
+        return '1';
+    }
+
+
+
+
     // delete cart item using cart item id
-    public function deleteCart($item_id = null, $table = 'cart'){
+    public function deleteCart($item_id = null, $CartID, $table = 'cart_items'){
         if($item_id != null){
-            $result = $this->db->con->query("DELETE FROM {$table} WHERE item_id={$item_id}");
+            $result = $this->db->con->query("DELETE FROM {$table} WHERE ProductID={$item_id} AND CartID={$CartID}");
             if($result){
                 header("Location:" . $_SERVER['PHP_SELF']);
             }
@@ -71,7 +115,7 @@ class Cart
     }
 
     // get item_it of shopping cart list
-    public function getCartId($cartArray = null, $key = "item_id"){
+    public function getCartId($cartArray = null, $key = "CustomerID"){
         if ($cartArray != null){
             $cart_id = array_map(function ($value) use($key){
                 return $value[$key];
