@@ -1,10 +1,12 @@
 <!--   product  -->
 <?php
     $item_id = $_GET['ProductID'] ?? 1;
-
-    foreach ($product->getData() as $item) :
-        if ($item['ProductID'] == $item_id) :
-
+    $item =null;
+    foreach ($product->getData() as $itr) {
+        if ($itr['ProductID'] == $item_id) {
+            $item =  $itr;
+        }
+    }
 
 //find total price
     $quantity = isset($_POST['qty']) ? intval($_POST['qty']) : 1;
@@ -34,9 +36,7 @@
    }
 
 ?>
-<header>
-    <script src="./index.js"></script>
-</header>
+
 
 <section id="product" class="py-3">
     <form method="post">
@@ -137,11 +137,27 @@
                         <div class="qty d-flex">
                             <h6 class="font-baloo">Qty</h6>
                             <div class="px-4 d-flex font-rale">
-                                    <button class="qty-up border bg-light" onclick="" data-id="pro1"><i class="fas fa-angle-up"></i></button>
-                                    <input type="text" data-id="pro1" name="quantity" class="qty_input border px-2 w-50 bg-light" value="1" placeholder="1">
-                                    <button data-id="pro1" class="qty-down border bg-light"><i class="fas fa-angle-down"></i></button>
+                                <?php $productQty = $product->getProduct($item['ProductID'])[0]['ProductQty']; ?>
+                                <button class="qty-up border bg-light" data-id="pro1" onclick="changeQuantity('pro1', 'up', <?php echo $productQty; ?>); return false;"><i class="fas fa-angle-up"></i></button>
+                                <input type="text" data-id="pro1" name="quantity" class="qty_input border px-2 w-50 bg-light" value="1" placeholder="1">
+                                <button data-id="pro1" class="qty-down border bg-light" onclick="changeQuantity('pro1', 'down'); return false;"><i class="fas fa-angle-down"></i></button>
                             </div>
                         </div>
+                        <script>
+                            function changeQuantity(productId, action, maxQuantity) {
+                                const inputElement = document.querySelector(`input[data-id="${productId}"]`);
+                                let quantity = parseInt(inputElement.value);
+
+                                if (action === 'up' && quantity < maxQuantity) {
+                                    quantity++;
+                                } else if (action === 'down' && quantity > 1) {
+                                    quantity--;
+                                }
+
+                                inputElement.value = quantity;
+                            }
+                        </script>
+
                         <!-- !product qty section -->
                     </div>
                 </div>
@@ -178,6 +194,6 @@
 
 <!--   !product  -->
 <?php
-        endif;
+/*        endif;
         endforeach;
-?>
+*/?>

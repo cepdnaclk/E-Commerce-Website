@@ -134,3 +134,16 @@ $(document).ready(function(){
 
 
 });
+
+function changeQuantity(productId, action) {
+    const inputElement = document.querySelector(`input[data-id="${productId}"]`);
+    let quantity = parseInt(inputElement.value);
+
+    if (action === 'up') {
+        quantity++;
+    } else if (action === 'down' && quantity > 1) {
+        quantity--;
+    }
+
+    inputElement.value = quantity;
+}

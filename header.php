@@ -67,6 +67,8 @@
                     <span class="px-3 py-2 rounded-pill text-dark bg-light"><?php echo count($product->getData('cart')); ?></span>
                 </a>
                 <a href="sign-in.php" class="px-3 text-dark">Login</a>
+
+                <a href="log-out.php" class="px-3 border-left text-dark">Log Out</a>
             </form>
         </div>
     </nav>
