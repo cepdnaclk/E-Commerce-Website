@@ -18,19 +18,25 @@
        if (isset($_POST['cart_submit'])){
            // call method addToCart
            //Check the session
-           if (session_status() === PHP_SESSION_ACTIVE) {
+          if ( isset($_SESSION['CustomerID'])){
+              if (session_status() === PHP_SESSION_ACTIVE) {
 
-           } else {
-               session_start();
-           }
-           $Cart->addToCart($_SESSION['CustomerID'], $item['ProductID'],$_POST['quantity'],$totalPrice);
+              } else {
+                  session_start();
+              }
+              $Cart->addToCart($_SESSION['CustomerID'], $item['ProductID'],$_POST['quantity'],$totalPrice);
+          }else{
+              header("Location: sign-in.php");
+              exit;
+          }
+
        }
    }
    //get Cart ID
    $CartID = 0;
    $resultArray=$product->getData('cart');
    foreach ($resultArray as $arr) {
-       if($arr['CustomerID'] === $_SESSION['CustomerID']){
+       if(isset($_SESSION['CustomerID']) && $arr['CustomerID'] === $_SESSION['CustomerID']){
            $CartID = $arr['CartID'];
        }
    }

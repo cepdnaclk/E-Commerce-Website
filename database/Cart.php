@@ -77,8 +77,8 @@ class Cart
                 $seg = $this->db->con->query("INSERT INTO {$table} (CustomerID) VALUES ({$CustomerID})");
 
                 if ($seg) {
-                    $row = $seg->fetch_assoc();
-                    return $row['CartID'];
+                    $cartId = $this->db->con->insert_id;
+                    return $cartId;
 
                 } else {
                     echo 'Something Went Wrong!';

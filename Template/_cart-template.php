@@ -11,7 +11,7 @@
     $resultArray = array();
     $resultArray=$product->getData('cart');
     foreach ($resultArray as $item) {
-        if($item['CustomerID'] === $_SESSION['CustomerID']){
+        if(isset($_SESSION['CustomerID']) && $item['CustomerID'] === $_SESSION['CustomerID']){
             $CartID = $item['CartID'];
         }
     }
