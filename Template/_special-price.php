@@ -45,7 +45,7 @@ $in_cart = $Cart->getCartId($product->getData('cart'));
                                 <span><i class="far fa-star"></i></span>
                             </div>-->
                             <div class="price py-2">
-                                <span>$<?php echo $item['ProductPrice'] ?? 0 ?></span>
+                                <span>Rs<?php echo $item['ProductPrice'] ?? 0 ?></span>
                             </div>
                             <form method="post">
                                 <input type="hidden" name="item_id" value="<?php echo $item['ProductID'] ?? '1'; ?>">

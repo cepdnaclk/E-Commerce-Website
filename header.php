@@ -18,10 +18,25 @@
     <!-- Custom CSS file -->
     <link rel="stylesheet" href="style.css">
 
+    <script>
+        $(document).ready(function() {
+            $('.nav-link').click(function() {
+                $('.nav-link').removeClass('bold-link'); // Remove the class from all links
+                $(this).addClass('bold-link'); // Add the class to the clicked link
+            });
+        });
+    </script>
+
+    <style>
+        .nav-item.active a {
+            font-weight: bold;
+        }
+    </style>
     <?php
     // require functions.php file
     require ('functions.php');
     ?>
+
 
 </head>
 <body>
@@ -31,20 +46,20 @@
 
     <!-- Primary Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark color-second-bg">
-        <a class="navbar-brand" href="#">Mobile Shopee</a>
+        <a class="navbar-brand" href="#">Electro Mart</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav m-auto font-rubik">
-                <li class="nav-item active">
+                <li class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'index.php') ? 'active' : ''; ?>">
                     <a class="nav-link" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Category</a>
+                    <a class="nav-link " href="#">Category</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Products <i class="fas fa-chevron-down"></i></a>
+                <li class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'all-Product.php') ? 'active' : ''; ?>">
+                    <a class="nav-link " href="all-Product.php">Products</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Category <i class="fas fa-chevron-down"></i></a>
@@ -53,7 +68,8 @@
 
                     session_start();
                     if (isset($_SESSION['AdminID'])&& $_SESSION['AdminID'] != '0' && isset($_SESSION['AdminID'])) {
-                        echo '<li class="nav-item">
+                        $isActiveAddItems= (basename($_SERVER['PHP_SELF']) == 'addItems.php') ? 'active' : '';
+                        echo '<li class="nav-item'.$isActiveAddItems.' ">
                             <a class="nav-link" href="addItems.php">Add Items</a>
                         </li>';
                     }
