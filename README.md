@@ -1,5 +1,5 @@
 
-# E-Commerce Platform Project Readme
+# E-Commerce Platform Project
 
 ## Table of Contents
 
@@ -103,7 +103,7 @@ To integrate this schema into your project, make sure to configure your PHP scri
 - E/19/170 Jayawardhana K.N.N. [email](#e19170@eng.pdn.ac.lk)
 
 #
-Thank you for choosing our E-Commerce Platform project. We hope it provides a seamless shopping experience for your customers and simplifies the management of your online store. If you have any questions or feedback, please don't hesitate to contact us. Happy coding!
+- Thank you for choosing our E-Commerce Platform project. We hope it provides a seamless shopping experience for your customers and simplifies the management of your online store. If you have any questions or feedback, please don't hesitate to contact us. Happy coding!
 
 
 
