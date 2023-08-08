@@ -1,11 +1,51 @@
+<?php  
+ob_start();
+// include header.php file
+include ('header.php');
+?>
+
+<?php
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['proceed_to_buy'])) {
+    $totalPrice = $_POST['total_price'];
+    $cart_id = $_POST['cart_id'];
+    
+
+
+    // Retrieve user details (you need to fetch these from your database)
+    $CustomerID = $_SESSION['CustomerID'] ;
+    
+    $connection = mysqli_connect('localhost', 'root', "", "online_store");
+
+
+    // Retrieve customer details using the customer ID
+    $customerQuery = "SELECT * FROM customer WHERE CustomerID = '$CustomerID'";
+    $customerResult = mysqli_query($connection, $customerQuery);
+
+    if ($customerResult && mysqli_num_rows($customerResult) > 0) {
+        // Fetch customer details from the result set
+        $customerData = mysqli_fetch_assoc($customerResult);
+
+        // Extract customer details
+        $customerFName = $customerData['FirstName'];
+        $customerLName = $customerData['LastName'];
+        $email = $customerData['Email'];
+        $telNo = $customerData['PhoneNumber'];
+        $AddressL1 = $customerData['AddressL1'];
+        $AddressL2 = $customerData['AddressL2'];
+        $AddressL3 = $customerData['AddressL3'];
+
+        
+}}
+?>
+
+<!-- Display order details and shipping address -->
+
+<!-- ajhfvkjhasvkffvakhfakhfkahfkhajuvffakhvfkahfahflahflahvflhavflhalfhalfhlahfvlahvsflhavlfhalhfvlfhlhfvalhjv -->
 <!-- Shopping cart section  -->
 <?php
 
-    if (session_status() === PHP_SESSION_ACTIVE) {
-
-    } else {
-        session_start();
-    }
     // Find cart Id belongs to current customer
     $CartID = 0;
     $resultArray = array();
@@ -16,21 +56,11 @@
         }
     }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-    if (isset($_POST['delete-cart-submit'])){
-        $deletedrecord = $Cart->deleteCart($_POST['item_id'],$CartID);
-    }
-
-    // save for later
-    if (isset($_POST['wishlist-submit'])){
-        $Cart->saveForLater($_POST['ProductID']);
-    }
-}
 ?>
 
 <section id="cart" class="py-3 mb-5">
     <div class="container-fluid w-75">
-        <h5 class="font-baloo font-size-20">Shopping Cart</h5>
+        <h5 class="font-baloo font-size-20">Order Confirmation</h5>
 
         <!--  shopping cart items   -->
         <div class="row">
@@ -75,10 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                                 <!--<button data-id="<?php /*echo $item['ProductID'] ?? '0'; */?>" class="qty-down border bg-light"><i class="fas fa-angle-down"></i></button>-->
                             </div>
 
-                            <form method="post">
-                                <input type="hidden" value="<?php echo $item['ProductID'] ?? 0; ?>" name="item_id">
-                                <button type="submit" name="delete-cart-submit" class="btn font-baloo text-danger px-3 border-right border-left">Delete</button>
-                            </form>
+                    
 
                             <!--<form method="post">
                                 <input type="hidden" value="<?php /*echo $item['ProductID'] ?? 0; */?>" name="item_id">
@@ -108,19 +135,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             </div>
             <!-- subtotal section-->
             <div class="col-sm-3">
-            
                 <div class="sub-total border text-center mt-2">
                     <h6 class="font-size-12 font-rale text-success py-3"><i class="fas fa-check"></i> Your order is eligible for FREE Delivery.</h6>
                     <div class="border-top py-4">
-                        <h5 class="font-baloo font-size-20">Subtotal<span class="text-danger">Rs<span class="text-danger" id="deal-price"><?php echo $totalPrice ?></span> </span> </h5>
-
-                        <form method="post" action="./order_confirmation.php">
-                         <input type="hidden" name="total_price" value="<?php echo $totalPrice; ?>">
-                         <input type="hidden" name="cart_id" value="<?php echo $CartID; ?>">
-                         <button type="submit" class="btn btn-warning mt-3" name="proceed_to_buy">Proceed to Buy</button>
-                         
-                        </form>
+                    <strong><h5 class="font-baloo font-size-20">Subtotal : <span class="text-danger">Rs.<span class="text-danger" id="deal-price"><?php echo $totalPrice ?></span> </h5></strong>
                         
+                        <div class ="col sm-2 text-left">
+                        <p><strong><h2 class="font-baloo font-size-16">Shipping Details:</h2></strong>
+                                
+                                <?php echo $customerFName; ?> <?php echo $customerLName; ?>,<br>
+                    
+                                    <?php echo $AddressL1; ?>,<br>
+                                    <?php echo $AddressL2; ?>,<br>
+                                    <?php echo $AddressL3; ?>.<br>
+                                
+                                
+                                Email: <?php echo $email; ?> <br>
+                                Tel: <?php echo $telNo; ?></p>
+                            </div>
+
+                        <!-- Confirm Order Button -->
+                        <form method="post" action="Confirmed_order.php">
+                         <input type="hidden" name="total_price" value="<?php echo $totalPrice; ?>">
+                         <input type="hidden" name="cart_id" value="<?php echo $cart_id; ?>">
+                         <button type="submit" class="btn btn-success" name="proceed_to_buy">Confirm Order</button>
+                        </form>
 
 
 
@@ -138,3 +177,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     </div>
 </section>
 <!-- !Shopping cart section  -->
+
+
+<!-- ajhfvkjhasvkffvakhfakhfkahfkhajuvffakhvfkahfahflahflahvflhavflhalfhalfhlahfvlahvsflhavlfhalhfvlfhlhfvalhjv -->
+
+
+<?php    
+
+
+    /*  include top sale section */
+        include ('Template/_new-phones.php');
+    /*  include top sale section */
+
+?>
+
+<?php
+// include footer.php file
+include ('footer.php');
+?>
