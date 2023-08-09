@@ -157,7 +157,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
             <!-- Submit button -->
             <button type="submit" name="signin" class="btn btn-primary btn-block mb-4">Sign in</button>
-
+            <button type="submit" name="guestsignin" onclick="window.open('index.php')" class="btn btn-primary btn-block mb-4">Sign In as Guest</button>
             <!-- Register buttons -->
             <div class="text-center">
                 <p>Not a member? <a  href="#pills-register" role="tab" aria-selected="false" >Register</a></p>
