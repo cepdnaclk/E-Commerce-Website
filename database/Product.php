@@ -69,11 +69,11 @@ class Product
 
             $result = $this->insertIntoProduct($params);
             if ($result){
-                echo "Product Added!";
+                echo '<script>alert("Product Added successfully!");</script>';
                 // Reload Page
                 header("Location: " . $_SERVER['PHP_SELF']);
             }else{
-                echo "Error Product Adding.";
+                echo '<script>alert("Error Product Adding.");</script>';
             }
         }
     }
@@ -105,6 +105,64 @@ class Product
         $result = $this->db->con->query("SELECT * FROM {$table} WHERE CategoryID={$CategoryID}");
         $result = $result->fetch_assoc();
         return $result['CategoryName'];
+    }
+
+
+
+
+    public function updateProduct($productID, $productName, $productCategory, $productPrice, $productQty, $productImage, $productDetails) {
+        // Create a connection to the database
+    
+        $conn = mysqli_connect('localhost', 'root', "", "online_store");
+        // Check if the connection was successful
+        if ($conn === false) {
+            die("Error connecting to database: " . mysqli_connect_error());
+        }
+    
+        // Prepare the UPDATE statement
+        $sql = "UPDATE product SET
+            ProductName = ?,
+            ProductCatagory = ?,
+            ProductPrice = ?,
+            ProductQty = ?,
+            ProductImage = ?,
+            ProductDetails = ?
+            WHERE ProductID = ?";
+    
+        // Create a prepared statement
+        $stmt = mysqli_prepare($conn, $sql);
+    
+        // Bind the parameters to the prepared statement
+        mysqli_stmt_bind_param($stmt, "siidssi", $productName, $productCategory, $productPrice, $productQty, $productImage, $productDetails, $productID);
+    
+        // Execute the prepared statement
+        $result = mysqli_stmt_execute($stmt);
+    
+        // Check if the statement was executed successfully
+        if ($result) {
+            // Display the success message
+            echo '<div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #dff0d8; border-color: #d0e9c6; padding: 10px; text-align: center; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); font-size: 20px;" id="successMessage">Product updated successfully!</div>';
+    
+            
+            // Wait for 3 seconds (1500 milliseconds) before redirecting
+            echo '<script>
+                setTimeout(function() {
+                    window.location.href = "./modifyItemsSelect.php";
+                }, 1500);
+            </script>';
+            
+            exit();
+        } else {
+            echo '<div class="alert alert-danger">Error updating product</div>';
+        }
+        
+        
+    
+        // Close the prepared statement
+        mysqli_stmt_close($stmt);
+    
+        // Close the database connection
+        mysqli_close($conn);
     }
 
 }
