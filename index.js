@@ -147,3 +147,46 @@ function changeQuantity(productId, action) {
 
     inputElement.value = quantity;
 }
+
+//Search Functions
+/*
+const searchInput = document.getElementById('searchInput');
+const autocompleteResults = document.getElementById('autocompleteResults');
+
+searchInput.addEventListener('input', function() {
+    const query = searchInput.value;
+    console.log("srhgerhejte"+query);
+    if (query.length > 0) {
+        fetch(`products.php?query=${query}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Network response was not ok: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(products => {
+                autocompleteResults.innerHTML = '';
+                products.forEach(product => {
+                    const productDiv = document.createElement('div');
+                    productDiv.textContent = product;
+                    productDiv.addEventListener('click', function () {
+                        searchInput.value = product;
+                        autocompleteResults.innerHTML = '';
+                    });
+                    autocompleteResults.appendChild(productDiv);
+                })
+            })
+                    .catch(error => {
+                        console.error('Fetch error:', error);
+                    });
+    } else {
+        autocompleteResults.innerHTML = '';
+    }
+});
+
+document.addEventListener('click', function(event) {
+    if (!searchInput.contains(event.target) && !autocompleteResults.contains(event.target)) {
+        autocompleteResults.innerHTML = '';
+    }
+});*/
+

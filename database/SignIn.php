@@ -74,5 +74,19 @@ class SignIn
         }
     }
 
+    public function getCustomerName($CustomerID){
+        if(isset($CustomerID)){
+            $result = $this->db->con->query("SELECT * FROM customer WHERE CustomerID={$CustomerID}");
+
+            if ($result->num_rows>0){
+                $row = $result->fetch_assoc();
+                $Name = $row['FirstName'];
+                return $Name;
+            }else{
+
+                return null;
+            }
+        }
+    }
 }
 

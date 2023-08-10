@@ -28,3 +28,4 @@ $SignUp = new SignUp($db);
 
 //Sign in object
 $SignIn = new SignIn($db);
+

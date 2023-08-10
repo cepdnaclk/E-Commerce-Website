@@ -16,15 +16,13 @@
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['proceed_to_buy'])) {
-    // Get the total price from the form data
-    $totalPrice = $_POST['total_price'];
-    $cart_id = $_POST['cart_id'];
-    
-    // Retrieve the customer ID from the session
-    $customerID = $_SESSION['CustomerID'];
+       // Get the total price from the form data
+       $totalPrice = $_POST['total_price'];
+       $cart_id = $_POST['cart_id'];
 
-    // Connect to the database
-    $connection = mysqli_connect('localhost', 'root', "", "online_store");
+       // Retrieve the customer ID from the session
+       $customerID = $_SESSION['CustomerID'];
+
 
     // Insert order details into the "orders" table
     $insertOrderQuery = "INSERT INTO orders (CustomerID, OrderDate,OrderTotal, OrderStatus) VALUES ('$customerID', NOW(),'$totalPrice', 'Pending')";
@@ -42,46 +40,50 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['proceed_to_buy'])) {
     
     mysqli_query($connection, $insertTrackingQuery);
 
-    // Loop through cart items and insert into the "order_items" table
-    //$cartItems = $Cart->getCart($CartID); // Replace with your cart retrieval logic
 
-    $cartQuery = "SELECT * FROM cart_items WHERE CartID = '$cart_id'";
-    $cartResult = mysqli_query($connection, $cartQuery);
+       // Get the generated order ID
+       $orderID = mysqli_insert_id($connection);
 
-     foreach ($cartResult as $cartItem) {
-        $productID = $cartItem['ProductID'];
-        $qty = $cartItem['Qty'];
-        $price = $cartItem['Price'];
 
-        // Insert into "order_items" table
-        $insertOrderItemQuery = "INSERT INTO order_item (OrderID, ProductID, OrderQty, Price) VALUES ('$orderID', '$productID', '$qty', '$price')";
-        mysqli_query($connection, $insertOrderItemQuery);
+       // Loop through cart items and insert into the "order_items" table
+       //$cartItems = $Cart->getCart($CartID); // Replace with your cart retrieval logic
 
-        //modify products table
-        $productQuery = "SELECT ProductQty FROM product WHERE ProductID = '$productID'";
-        $productResult = mysqli_query($connection, $productQuery);
+       $cartQuery = "SELECT * FROM cart_items WHERE CartID = '$cart_id'";
+       $cartResult = mysqli_query($connection, $cartQuery);
 
-            $productData = mysqli_fetch_assoc($productResult);
-            $currentQty = $productData['ProductQty'];
+       foreach ($cartResult as $cartItem) {
+           $productID = $cartItem['ProductID'];
+           $qty = $cartItem['Qty'];
+           $price = $cartItem['Price'];
 
-            // Calculate the updated quantity
-            $updatedQty = $currentQty - $qty;
+           // Insert into "order_items" table
+           $insertOrderItemQuery = "INSERT INTO order_item (OrderID, ProductID, OrderQty, Price) VALUES ('$orderID', '$productID', '$qty', '$price')";
+           mysqli_query($connection, $insertOrderItemQuery);
 
-            // Update the product quantity in the products table
-            $updateProductQuery = "UPDATE product SET ProductQty = '$updatedQty' WHERE ProductID = '$productID'";
-            mysqli_query($connection, $updateProductQuery);
-    
+           //modify products table
+           $productQuery = "SELECT ProductQty FROM product WHERE ProductID = '$productID'";
+           $productResult = mysqli_query($connection, $productQuery);
 
-    }
+           $productData = mysqli_fetch_assoc($productResult);
+           $currentQty = $productData['ProductQty'];
 
-    
+           // Calculate the updated quantity
+           $updatedQty = $currentQty - $qty;
 
-    // Delete the cart and associated cart items
-    $deleteCartItemsQuery = "DELETE FROM cart_items WHERE CartID = '$cart_id'";
-    $deleteCartQuery = "DELETE FROM cart WHERE CartID = '$cart_id'";
-    mysqli_query($connection, $deleteCartItemsQuery);
-    mysqli_query($connection, $deleteCartQuery);
-    
+           // Update the product quantity in the products table
+           $updateProductQuery = "UPDATE product SET ProductQty = '$updatedQty' WHERE ProductID = '$productID'";
+           mysqli_query($connection, $updateProductQuery);
+
+
+       }
+
+
+
+       // Delete the cart and associated cart items
+       $deleteCartItemsQuery = "DELETE FROM cart_items WHERE CartID = '$cart_id'";
+       $deleteCartQuery = "DELETE FROM cart WHERE CartID = '$cart_id'";
+       mysqli_query($connection, $deleteCartItemsQuery);
+       mysqli_query($connection, $deleteCartQuery);
 
 
 
