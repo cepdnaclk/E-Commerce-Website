@@ -1,5 +1,7 @@
 <?php
 
+
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $selectedCategory = $_POST['ProductCategory'] ?? '6';
     if (isset($_POST['addProduct'])){

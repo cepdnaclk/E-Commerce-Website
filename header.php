@@ -98,6 +98,16 @@
                         echo '<li class="nav-item'.$isActiveAddItems.' ">
                             <a class="nav-link" href="addItems.php">Add Items</a>
                         </li>';
+
+                        $isActiveModifyItems= (basename($_SERVER['PHP_SELF']) == 'modifyItemsSelect.php') ? 'active' : '';
+                        echo '<li class="nav-item'.$isActiveModifyItems.' ">
+                            <a class="nav-link" href="modifyItemsSelect.php">Modify Items</a>
+                        </li>';
+
+                        $isActiveModifyItems= (basename($_SERVER['PHP_SELF']) == 'tracking.php') ? 'active' : '';
+                        echo '<li class="nav-item'.$isActiveModifyItems.' ">
+                            <a class="nav-link" href="tracking.php">Orders</a>
+                        </li>';
                     }
 
                 ?>
