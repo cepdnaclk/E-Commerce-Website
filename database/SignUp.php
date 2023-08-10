@@ -67,11 +67,13 @@ class SignUp
                 if ($result){
                     echo "Registration successful!";
                     // Reload Page
+                    echo "<script>alert('You Are Registered!'); </script>";
                     header("Location: " . $_SERVER['PHP_SELF']);
                 }else{
                     echo "Error registering customer.";
                 }
             }else{
+                echo "<script>alert('Registration Failed! You Have another Account!'); </script>";
                 echo "Registration Failed! You Have another Account!";
             }
 

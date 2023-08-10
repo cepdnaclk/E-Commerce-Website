@@ -140,7 +140,7 @@
                 }
                 ?>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="account.php">My Account</a>
+                        <a class="dropdown-item" href="edit-user.php">Edit Account</a>
                         <a class="dropdown-item" href="customer_orders.php">My Orders</a>
                     </div>
                 </div>

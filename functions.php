@@ -16,6 +16,9 @@ require ('database/SignIn.php');
 //require Order Class
 require ('database/Orders.php');
 
+//require User Update Class
+require ('database/UpdateUser.php');
+
 // DBController object
 $db = new DBController();
 
@@ -34,3 +37,6 @@ $SignIn = new SignIn($db);
 
 //Order Object
 $Order = new Orders($db);
+
+//UpdateUse Object
+$UpdateUser = new UpdateUser($db);
