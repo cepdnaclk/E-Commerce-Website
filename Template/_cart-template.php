@@ -104,15 +104,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             <!-- subtotal section-->
             <?php
             if(isset($_SESSION['CustomerID'])){
+
                 echo ' <div class="col-sm-3">
-            
-                <div class="sub-total border text-center mt-2">
+                       <div class="sub-total border text-center mt-2">
                     <h6 class="font-size-12 font-rale text-success py-3"><i class="fas fa-check"></i> Your order is eligible for FREE Delivery.</h6>
                     <div class="border-top py-4">
-                        <h5 class="font-baloo font-size-20">Subtotal<span class="text-danger">Rs<span class="text-danger" id="deal-price"><?php echo $totalPrice ?></span> </span> </h5>
-                       
+                        <h5 class="font-baloo font-size-16">Subtotal</h5>
+                       <h5 class="font-baloo font-size-20"><span class="text-danger">Rs.<span class="text-danger" id="deal-price">'.$totalPrice.'</span> </span></h5>
+                      
+                      <form method="post" action="./order_confirmation.php">
+                         <input type="hidden" name="total_price" value="'.$totalPrice.'">
+                         <input type="hidden" name="cart_id" value="'.$CartID.'">
+                         <button type="submit" class="btn btn-warning mt-3" name="proceed_to_buy">Proceed to Buy</button>
+                         
+                        </form>
                         
-
                     </div>
                 </div>
             </div>';
