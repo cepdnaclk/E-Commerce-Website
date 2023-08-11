@@ -12,7 +12,7 @@ class Orders
     }
     public function getOrderByCusID($CustomerID = null, $table= 'orders'){
         if (isset($CustomerID)){
-            $result = $this->db->con->query("SELECT * FROM {$table} WHERE CustomerID={$CustomerID}");
+            $result = $this->db->con->query("SELECT * FROM {$table} WHERE CustomerID={$CustomerID} ORDER BY OrderID DESC");
             $resultArray = array();
 
             // fetch product data one by one
@@ -37,9 +37,9 @@ class Orders
     }
 
     // delete cart item using cart item id
-    public function deleteOrder($OrderID = null, $CartID, $table = 'orders'){
+    public function deleteOrder($OrderID = null,$CustomerID, $table = 'orders'){
         if($OrderID!= null){
-            $result = $this->db->con->query("DELETE FROM {$table} WHERE ProductID={$item_id} AND OrderID={$OrderID}");
+            $result = $this->db->con->query("DELETE FROM {$table} WHERE CustomerID={$CustomerID} AND OrderID={$OrderID}");
             if($result){
                 header("Location:" . $_SERVER['PHP_SELF']);
             }

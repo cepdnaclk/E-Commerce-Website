@@ -28,12 +28,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['proceed_to_buy'])) {
 
     // Insert order details into the "orders" table
     $insertOrderQuery = "INSERT INTO orders (CustomerID, OrderDate,OrderTotal, OrderStatus) VALUES ('$customerID', NOW(),'$totalPrice', 'Pending')";
-    
-    
+
+
+
+    $connection = mysqli_connect('localhost', 'root', "", "online_store");
+
+
     mysqli_query($connection, $insertOrderQuery);
 
     // Get the generated order ID
     $orderID = mysqli_insert_id($connection);
+
 
     //insert tracking details into  the "tracking"  table
     $insertTrackingQuery = "INSERT INTO tracking (OrderID) VALUES ('$orderID')";

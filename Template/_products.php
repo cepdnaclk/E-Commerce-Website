@@ -8,9 +8,8 @@
         }
     }
 
-//find total price
-    $quantity = isset($_POST['qty']) ? intval($_POST['qty']) : 1;
-    $totalPrice = ($item['ProductPrice'] ?? 0) * $quantity;
+
+
 
 // request method post
 
@@ -24,10 +23,15 @@
               } else {
                   session_start();
               }
+              //find total price
+              $quantity = isset($_POST['quantity']) ? intval($_POST['quantity']) : 1;
+              $totalPrice = ($item['ProductPrice'] ?? 0) * $quantity;
               $Cart->addToCart($_SESSION['CustomerID'], $item['ProductID'],$_POST['quantity'],$totalPrice);
+              header("Location: cart.php");
+              exit();
           }else{
               header("Location: sign-in.php");
-              exit;
+              exit();
           }
 
        }
@@ -71,6 +75,7 @@
                             echo '<button type="submit" class="btn btn-success font-size-16 form-control">In the Cart</button>';
                         } else {
                             echo '<button type="submit" name="cart_submit" class="btn btn-warning font-size-16 form-control">Add to Cart</button>';
+
                         }
                         ?>
 

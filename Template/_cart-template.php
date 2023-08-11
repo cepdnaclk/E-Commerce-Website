@@ -47,7 +47,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                         <img src="<?php echo $item['ProductImage'] ?? "./assets/products/1.png" ?>" style="height: 120px;" alt="cart1" class="img-fluid">
                     </div>
                     <div class="col-sm-8">
-                        <h5 class="font-baloo font-size-20"><?php echo $item['ProductName'] ?? "Unknown"; ?></h5>
+                        <h5 class="font-baloo font-size-20">
+                            <a href="product.php?ProductID=<?php echo $item['ProductID']; ?>">
+                                <?php echo $item['ProductName'] ?? "Unknown"; ?>
+                            </a>
+                        </h5>
                         <small>by <?php echo $product->getCategory($item['ProductCatagory'])?? "Brand"; ?></small>
                         <!-- product rating -->
                         <!--<div class="d-flex">
@@ -88,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
                     <div class="col-sm-2 text-right">
                         <div class="font-size-20 text-danger font-baloo">
-                            Rs<span class="product_price" data-id="<?php echo $item['ProductID'] ?? '0'; ?>"><?php echo $item['ProductPrice'] ?? 0; ?></span>
+                            Rs<span class="product_price" data-id="<?php echo $item['ProductID'] ?? '0'; ?>"><?php echo $cart['Price'] ?? 0; ?></span>
                         </div>
                     </div>
                 </div>
