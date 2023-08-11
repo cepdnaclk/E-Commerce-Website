@@ -92,6 +92,8 @@
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <?php
+                    // Replace this with your actual function call to fetch categories
+                    $categories = $product->getData('category'); // Assuming the table name is 'categories'
 
                     foreach ($categories as $category) {
                         $categoryID = $category['CategoryID'];
