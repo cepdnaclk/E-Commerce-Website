@@ -73,6 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         .total-price {
             font-size: 20px;
             color: #ff4d4d;
+            align-content: end;
         }
         .order-tracking {
             margin-top: 10px;
@@ -109,12 +110,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                     ?>
 
                     <div class="order-details">
+                        <span class="total-price">Total: Rs <?php echo $order['OrderTotal'] ?? 0; ?></span>
                         <form method="post">
                             <input name="order_id" value="<?php echo $order['OrderID'] ?? 0; ?>" hidden>
                             <button type="submit" name="delete-cart-submit" class="delete-btn">Delete</button>
                         </form>
                     </div>
-                    <span class="total-price">Total: Rs <?php echo $order['OrderTotal'] ?? 0; ?></span>
+
 
                     <div class="order-tracking">
                         <?php
