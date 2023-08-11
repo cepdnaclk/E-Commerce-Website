@@ -81,15 +81,27 @@
                 <li class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'index.php') ? 'active' : ''; ?>">
                     <a class="nav-link" href="index.php">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link " href="#">Category</a>
-                </li>
                 <li class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'all-Product.php') ? 'active' : ''; ?>">
                     <a class="nav-link " href="all-Product.php">Products</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Category <i class="fas fa-chevron-down"></i></a>
+
+                <li class="dropdown">
+                    <?php               
+                        echo '<a href="#" class="px-3 text-dark dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category</a>';              
+                    ?>      
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <?php
+
+                    foreach ($categories as $category) {
+                        $categoryID = $category['CategoryID'];
+                        echo '<a class="dropdown-item" href="all-Product.php?category='.$categoryID.'">' .$category['CategoryName'].'</a>';
+                    }
+                    ?>
+                </div>
+
                 </li>
+
                 <?php
 
                     session_start();
@@ -111,6 +123,7 @@
                     }
 
                 ?>
+
             <li>
                 <div class="input-group" style="margin-left: 20px">
                     <input type="text" id="searchInput" class="form-control" placeholder="Search Products">
@@ -125,10 +138,12 @@
             </li>
 
             </ul>
+
             <form action="#" class="font-size-14 font-rale">
                 <a href="cart.php" class="py-2 rounded-pill color-primary-bg">
                     <span class="font-size-16 px-2 text-white"><i class="fas fa-shopping-cart"></i></span>
                 </a>
+
                 <div class="dropdown">
 
                 <?php
