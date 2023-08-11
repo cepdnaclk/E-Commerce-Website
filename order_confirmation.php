@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['proceed_to_buy'])) {
                         <div class="qty d-flex pt-2">
                             <div class="d-flex font-rale w-25">
                                 <button class="qty-up border bg-light" data-id="" disabled>Qty</i></button>
-                                <input type="text" data-id="<?php echo $cart['Qty'] ?? '0'; ?>" class="qty_input border px-2 w-100 bg-light" disabled value="1" placeholder="1">
+                                <input type="text" data-id="qty" class="qty_input border px-2 w-100 bg-light" disabled  placeholder="<?php echo $cart['Qty'] ?? '0'; ?>">
                                 <!--<button data-id="<?php /*echo $item['ProductID'] ?? '0'; */?>" class="qty-down border bg-light"><i class="fas fa-angle-down"></i></button>-->
                             </div>
 
