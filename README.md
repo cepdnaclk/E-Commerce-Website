@@ -5,18 +5,16 @@
 
 - [Introduction](#introduction)
 - [Features](#features)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Usage](#usage)
   - [Home Page](#home-page)
   - [Product Page](#product-page)
+  - [Search Bar](#search-bar)
   - [Cart](#cart)
   - [User Authentication](#user-authentication)
+  - [User Profile](#user-profile)
   - [Admin Panel](#admin-panel)
   - [Database Schema](#database-schema)
 - [Contributors](#contributors)
-- [License](#license)
+
 
 ## Introduction
 
@@ -39,6 +37,11 @@ Welcome to the E-Commerce Platform project! This project aims to create a user-f
 - Select desired quantity before purchasing.
 - Add products to the cart.
 
+### Search Bar
+
+Introducing an optimized search bar that allows users to search all products listed on our site. Users can easily find products by entering relevant keywords.
+
+
 ### Cart:
 
 - Review selected products before checkout.
@@ -51,10 +54,16 @@ Welcome to the E-Commerce Platform project! This project aims to create a user-f
 - Registered users can log in to the platform.
 - Guest users can browse products but need to log in to make a purchase.
 
+### User Profile
+
+- Users can edit their profile details
+- Users can view their order details including tracking numbers and shipping company information
+
 ### Admin Panel:
 
 - Admins can add, delete, and modify product details.
 - Admins can manage product quantities.
+- Admins can assign tracking IDs to customer orders and input shipping company information.
 
 ## Database Schema
 
@@ -91,6 +100,10 @@ Stores information about individual items within an order, including product ID,
 #### admin
 
 Associates customers with admin privileges, allowing them to manage products.
+
+### tracking
+
+Stores informations about tracking numbers and tracking company
 
 The provided database schema is designed to support the various features of the E-Commerce Platform, such as product browsing, cart management, and order processing. It includes primary keys, foreign keys, and relationships between tables to ensure data integrity and consistency.
 
