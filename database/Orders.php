@@ -40,11 +40,13 @@ class Orders
 
     // delete cart item using cart item id
 
-    public function deleteOrder($OrderID = null,$CustomerID, $table = 'orders'){
+    public function deleteOrder($OrderID = null,$CustomerID, $table = 'orders',$orderItemsTable='order_item'){
         if($OrderID!= null){
+            $resItm = $this->db->con->query("DELETE FROM {$orderItemsTable} WHERE OrderID = {$OrderID}");
+
             $result = $this->db->con->query("DELETE FROM {$table} WHERE CustomerID={$CustomerID} AND OrderID={$OrderID}");
 
-            if($result){
+            if($resItm && $result){
                 header("Location:" . $_SERVER['PHP_SELF']);
             }
             return $result;
