@@ -193,7 +193,7 @@
 
             </div>
 
-            <div class="col-12">
+            <div class="col-12" style="margin-top:50px;">
                 <h6 class="font-rubik">Product Description</h6>
                 <hr>
                 <p class="font-rale font-size-14"><?php echo $item['ProductDetails'] ?? ""; ?></p>

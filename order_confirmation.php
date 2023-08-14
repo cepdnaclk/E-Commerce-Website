@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['proceed_to_buy'])) {
 
                     <div class="col-sm-2 text-right">
                         <div class="font-size-20 text-danger font-baloo">
-                            Rs<span class="product_price" data-id="<?php echo $item['ProductID'] ?? '0'; ?>"><?php echo $item['ProductPrice'] ?? 0; ?></span>
+                            $<span class="product_price" data-id="<?php echo $item['ProductID'] ?? '0'; ?>"><?php echo $item['ProductPrice'] ?? 0; ?></span>
                         </div>
                     </div>
                 </div>
@@ -138,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['proceed_to_buy'])) {
                 <div class="sub-total border text-center mt-2">
                     <h6 class="font-size-12 font-rale text-success py-3"><i class="fas fa-check"></i> Your order is eligible for FREE Delivery.</h6>
                     <div class="border-top py-4">
-                    <strong><h5 class="font-baloo font-size-20">Subtotal : <span class="text-danger">Rs.<span class="text-danger" id="deal-price"><?php echo $totalPrice ?></span> </h5></strong>
+                    <strong><h5 class="font-baloo font-size-20">Subtotal : <span class="text-danger">$<span class="text-danger" id="deal-price"><?php echo $totalPrice ?></span> </h5></strong>
                         
                         <div class ="col sm-2 text-left">
                         <p><strong><h2 class="font-baloo font-size-16">Shipping Details:</h2></strong>

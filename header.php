@@ -27,10 +27,7 @@
             position: relative;
             display: inline-block;
         }
-        .text-white{
 
-            
-        }
 
         /* Style for the dropdown content */
         .dropdown-content {
@@ -131,6 +128,18 @@
                  <?php   }
 
                 ?>
+            <li>
+                <div class="input-group" style="margin-left: 20px">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Search Products">
+                    <input id="productID" hidden>
+                    <ul id="autocompleteResults" class="dropdown-menu" ></ul>
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary" id="searchButton" type="button">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </li>
 
             <li>
                 <div class="input-group" style="margin-left: 20px">
@@ -152,7 +161,9 @@
                     <span class="font-size-16 px-2 text-white"><i class="fas fa-shopping-cart"></i></span>
                 </a>
 
+
                 <div class="dropdown">
+
 
                 <?php
                 if(isset($_SESSION['CustomerID'])){
