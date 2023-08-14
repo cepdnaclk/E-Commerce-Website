@@ -27,6 +27,10 @@
             position: relative;
             display: inline-block;
         }
+        .text-white{
+
+            
+        }
 
         /* Style for the dropdown content */
         .dropdown-content {
@@ -84,10 +88,10 @@
                 <li class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'all-Product.php') ? 'active' : ''; ?>">
                     <a class="nav-link " href="all-Product.php">Products</a>
                 </li>
-
+                
                 <li class="dropdown">
                     <?php               
-                        echo '<a href="#" class="px-3 text-dark dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category</a>';              
+                        echo '<a href="#" class="px-3 nav-link dropdown-toggle"  id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category</a>';              
                     ?>      
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -108,21 +112,23 @@
 
                     session_start();
                     if (isset($_SESSION['AdminID'])&& $_SESSION['AdminID'] != '0' && isset($_SESSION['AdminID'])) {
-                        $isActiveAddItems= (basename($_SERVER['PHP_SELF']) == 'addItems.php') ? 'active' : '';
-                        echo '<li class="nav-item'.$isActiveAddItems.' ">
+
+                        ?>
+
+                                                <li class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'addItems.php') ? 'active' : ''; ?>">
                             <a class="nav-link" href="addItems.php">Add Items</a>
-                        </li>';
+                        </li>
 
-                        $isActiveModifyItems= (basename($_SERVER['PHP_SELF']) == 'modifyItemsSelect.php') ? 'active' : '';
-                        echo '<li class="nav-item'.$isActiveModifyItems.' ">
+                        
+                      <li class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'modifyItemsSelect.php') ? 'active' : ''; ?> ">
                             <a class="nav-link" href="modifyItemsSelect.php">Modify Items</a>
-                        </li>';
+                        </li>
 
-                        $isActiveModifyItems= (basename($_SERVER['PHP_SELF']) == 'tracking.php') ? 'active' : '';
-                        echo '<li class="nav-item'.$isActiveModifyItems.' ">
+                        
+                        <li class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'tracking.php') ? 'active' : ''; ?>">
                             <a class="nav-link" href="tracking.php">Orders</a>
-                        </li>';
-                    }
+                        </li>
+                 <?php   }
 
                 ?>
 
