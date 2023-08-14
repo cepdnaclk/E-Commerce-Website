@@ -98,7 +98,7 @@
 
                     foreach ($categories as $category) {
                         $categoryID = $category['CategoryID'];
-                        echo '<a class="dropdown-item" href="all-Product.php?category='.$categoryID.'">' .$category['CategoryName'].'</a>';
+                        echo '<a class="dropdown-item" href="select-product.php?category='.$categoryID.'">' .$category['CategoryName'].'</a>';
                     }
                     ?>
                 </div>
