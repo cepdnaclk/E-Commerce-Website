@@ -32,7 +32,7 @@ class Cart
     }
     public function getCart($CartID = null, $table= 'cart_items'){
         if (isset($CartID)){
-            $result = $this->db->con->query("SELECT * FROM {$table} WHERE CartID={$CartID}");
+            $result = $this->db->con->query("SELECT * FROM {$table} WHERE CartID={$CartID} ORDER BY CartID DESC;");
             $resultArray = array();
 
             // fetch product data one by one

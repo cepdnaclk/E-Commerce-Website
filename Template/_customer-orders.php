@@ -12,7 +12,9 @@ $resultArray = array();
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     if (isset($_POST['delete-cart-submit'])){
-        $deletedrecord = $Order->deleteOrder($_POST['item_id'],$CartID);
+
+        $deletedrecord = $Order->deleteOrder($_POST['order_id'],$_SESSION['CustomerID']);
+
     }
 }
 
@@ -73,6 +75,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         .total-price {
             font-size: 20px;
             color: #ff4d4d;
+
+            align-content: end;
+
         }
         .order-tracking {
             margin-top: 10px;
@@ -109,12 +114,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                     ?>
 
                     <div class="order-details">
+
+                        <span class="total-price">Total: $ <?php echo $order['OrderTotal'] ?? 0; ?></span>
                         <form method="post">
-                            <input type="hidden" value="<?php echo $order['OrderID'] ?? 0; ?>" name="item_id">
+                            <input name="order_id" value="<?php echo $order['OrderID'] ?? 0; ?>" hidden>
                             <button type="submit" name="delete-cart-submit" class="delete-btn">Delete</button>
                         </form>
-                        <span class="total-price">Total: $ <?php echo $order['OrderTotal'] ?? 0; ?></span>
                     </div>
+
+
 
                     <div class="order-tracking">
                         <?php

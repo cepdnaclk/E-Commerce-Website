@@ -28,6 +28,7 @@
             display: inline-block;
         }
 
+
         /* Style for the dropdown content */
         .dropdown-content {
             display: none;
@@ -81,34 +82,50 @@
                 <li class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'index.php') ? 'active' : ''; ?>">
                     <a class="nav-link" href="index.php">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link " href="#">Category</a>
-                </li>
                 <li class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'all-Product.php') ? 'active' : ''; ?>">
                     <a class="nav-link " href="all-Product.php">Products</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Category <i class="fas fa-chevron-down"></i></a>
+                
+                <li class="dropdown">
+                    <?php               
+                        echo '<a href="#" class="px-3 nav-link dropdown-toggle"  id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category</a>';              
+                    ?>      
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <?php
+                    // Replace this with your actual function call to fetch categories
+                    $categories = $product->getData('category'); // Assuming the table name is 'categories'
+
+                    foreach ($categories as $category) {
+                        $categoryID = $category['CategoryID'];
+                        echo '<a class="dropdown-item" href="all-Product.php?category='.$categoryID.'">' .$category['CategoryName'].'</a>';
+                    }
+                    ?>
+                </div>
+
                 </li>
+
                 <?php
 
                     session_start();
                     if (isset($_SESSION['AdminID'])&& $_SESSION['AdminID'] != '0' && isset($_SESSION['AdminID'])) {
-                        $isActiveAddItems= (basename($_SERVER['PHP_SELF']) == 'addItems.php') ? 'active' : '';
-                        echo '<li class="nav-item'.$isActiveAddItems.' ">
+
+                        ?>
+
+                                                <li class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'addItems.php') ? 'active' : ''; ?>">
                             <a class="nav-link" href="addItems.php">Add Items</a>
-                        </li>';
+                        </li>
 
-                        $isActiveModifyItems= (basename($_SERVER['PHP_SELF']) == 'modifyItemsSelect.php') ? 'active' : '';
-                        echo '<li class="nav-item'.$isActiveModifyItems.' ">
+                        
+                      <li class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'modifyItemsSelect.php') ? 'active' : ''; ?> ">
                             <a class="nav-link" href="modifyItemsSelect.php">Modify Items</a>
-                        </li>';
+                        </li>
 
-                        $isActiveModifyItems= (basename($_SERVER['PHP_SELF']) == 'tracking.php') ? 'active' : '';
-                        echo '<li class="nav-item'.$isActiveModifyItems.' ">
+                        
+                        <li class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'tracking.php') ? 'active' : ''; ?>">
                             <a class="nav-link" href="tracking.php">Orders</a>
-                        </li>';
-                    }
+                        </li>
+                 <?php   }
 
                 ?>
             <li>
@@ -124,12 +141,29 @@
                 </div>
             </li>
 
+            <li>
+                <div class="input-group" style="margin-left: 20px">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Search Products">
+                    <input id="productID" hidden>
+                    <ul id="autocompleteResults" class="dropdown-menu" ></ul>
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary" id="searchButton" type="button">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </li>
+
             </ul>
+
             <form action="#" class="font-size-14 font-rale">
                 <a href="cart.php" class="py-2 rounded-pill color-primary-bg">
                     <span class="font-size-16 px-2 text-white"><i class="fas fa-shopping-cart"></i></span>
                 </a>
+
+
                 <div class="dropdown">
+
 
                 <?php
                 if(isset($_SESSION['CustomerID'])){

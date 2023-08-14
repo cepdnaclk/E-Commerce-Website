@@ -39,7 +39,9 @@ if (isset($_SESSION['matchingProducts'])) {
                             <h6><?php echo  $item['ProductName'] ?? "Unknown";  ?></h6>
 
                             <div class="price py-2">
+
                                 <span>$<?php echo $item['ProductPrice'] ?? '0' ; ?></span>
+
                             </div>
                             <form method="post">
                                 <input type="hidden" name="item_id" value="<?php echo $item['ProductID'] ?? '1'; ?>">
