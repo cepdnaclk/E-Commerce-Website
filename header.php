@@ -17,24 +17,50 @@
 
     <!-- Custom CSS file -->
     <link rel="stylesheet" href="style.css">
-
-    <script>
-        $(document).ready(function() {
-            $('.nav-link').click(function() {
-                $('.nav-link').removeClass('bold-link'); // Remove the class from all links
-                $(this).addClass('bold-link'); // Add the class to the clicked link
-            });
-        });
-    </script>
-
+    <script src="header.js"></script>
     <style>
         .nav-item.active a {
             font-weight: bold;
         }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Style for the dropdown content */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        /* Style for dropdown links */
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* Highlight dropdown links on hover */
+        .dropdown-content a:hover {
+            background-color: rgba(34, 131, 198, 0);
+        }
+
+        /* Show dropdown content when hovering over the dropdown container */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
     </style>
     <?php
     // require functions.php file
     require ('functions.php');
+
     ?>
 
 
@@ -85,19 +111,45 @@
                     }
 
                 ?>
+            <li>
+                <div class="input-group" style="margin-left: 20px">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Search Products">
+                    <input id="productID" hidden>
+                    <ul id="autocompleteResults" class="dropdown-menu" ></ul>
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary" id="searchButton" type="button">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </li>
 
             </ul>
             <form action="#" class="font-size-14 font-rale">
                 <a href="cart.php" class="py-2 rounded-pill color-primary-bg">
                     <span class="font-size-16 px-2 text-white"><i class="fas fa-shopping-cart"></i></span>
                 </a>
-                <a href="sign-in.php" class="px-3 text-dark">Login</a>
+                <div class="dropdown">
 
+                <?php
+                if(isset($_SESSION['CustomerID'])){
+                    $name = $SignIn->getCustomerName($_SESSION['CustomerID']);
+                    echo '<a href="sign-in.php" class="px-3 text-dark dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hi! '.$name.'</a>';
+                }else{
+                    echo '<a href="sign-in.php" class="px-3 text-dark">Login</a>';
+                }
+                ?>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="edit-user.php">Edit Account</a>
+                        <a class="dropdown-item" href="customer_orders.php">My Orders</a>
+                    </div>
+                </div>
                 <a href="log-out.php" class="px-3 border-left text-dark">Log Out</a>
             </form>
         </div>
     </nav>
     <!-- !Primary Navigation -->
+
 
 </header>
 <!-- !start #header -->

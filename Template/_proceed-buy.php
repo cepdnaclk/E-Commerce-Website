@@ -30,8 +30,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['proceed_to_buy'])) {
     $insertOrderQuery = "INSERT INTO orders (CustomerID, OrderDate,OrderTotal, OrderStatus) VALUES ('$customerID', NOW(),'$totalPrice', 'Pending')";
     
     
-
-
     mysqli_query($connection, $insertOrderQuery);
 
     // Get the generated order ID

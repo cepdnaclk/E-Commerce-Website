@@ -20,11 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     if (isset($_POST['delete-cart-submit'])){
         $deletedrecord = $Cart->deleteCart($_POST['item_id'],$CartID);
     }
-
-    // save for later
-    if (isset($_POST['wishlist-submit'])){
-        $Cart->saveForLater($_POST['ProductID']);
-    }
 }
 ?>
 
@@ -71,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                         <div class="qty d-flex pt-2">
                             <div class="d-flex font-rale w-25">
                                 <button class="qty-up border bg-light" data-id="" disabled>Qty</i></button>
-                                <input type="text" data-id="<?php echo $cart['Qty'] ?? '0'; ?>" class="qty_input border px-2 w-100 bg-light" disabled value="1" placeholder="1">
+                                <input type="text" data-id="qty" class="qty_input border px-2 w-100 bg-light" disabled  placeholder="<?php echo $cart['Qty'] ?? '0'; ?>">
                                 <!--<button data-id="<?php /*echo $item['ProductID'] ?? '0'; */?>" class="qty-down border bg-light"><i class="fas fa-angle-down"></i></button>-->
                             </div>
 
@@ -93,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
                     <div class="col-sm-2 text-right">
                         <div class="font-size-20 text-danger font-baloo">
-                            Rs<span class="product_price" data-id="<?php echo $item['ProductID'] ?? '0'; ?>"><?php echo $item['ProductPrice'] ?? 0; ?></span>
+                            $<span class="product_price" data-id="<?php echo $item['ProductID'] ?? '0'; ?>"><?php echo $item['ProductPrice'] ?? 0; ?></span>
                         </div>
                     </div>
                 </div>
@@ -107,31 +102,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 ?>
             </div>
             <!-- subtotal section-->
-            <div class="col-sm-3">
-            
-                <div class="sub-total border text-center mt-2">
+            <?php
+            if(isset($_SESSION['CustomerID'])){
+
+                echo ' <div class="col-sm-3">
+                       <div class="sub-total border text-center mt-2">
                     <h6 class="font-size-12 font-rale text-success py-3"><i class="fas fa-check"></i> Your order is eligible for FREE Delivery.</h6>
                     <div class="border-top py-4">
-                        <h5 class="font-baloo font-size-20">Subtotal<span class="text-danger">Rs<span class="text-danger" id="deal-price"><?php echo $totalPrice ?></span> </span> </h5>
-
-                        <form method="post" action="./order_confirmation.php">
-                         <input type="hidden" name="total_price" value="<?php echo $totalPrice; ?>">
-                         <input type="hidden" name="cart_id" value="<?php echo $CartID; ?>">
+                        <h5 class="font-baloo font-size-16">Subtotal</h5>
+                       <h5 class="font-baloo font-size-20"><span class="text-danger">$<span class="text-danger" id="deal-price">'.$totalPrice.'</span> </span></h5>
+                      
+                      <form method="post" action="./order_confirmation.php">
+                         <input type="hidden" name="total_price" value="'.$totalPrice.'">
+                         <input type="hidden" name="cart_id" value="'.$CartID.'">
                          <button type="submit" class="btn btn-warning mt-3" name="proceed_to_buy">Proceed to Buy</button>
                          
                         </form>
                         
-
-
-
-
-
-
-
-
                     </div>
                 </div>
-            </div>
+            </div>';
+            }
+
+            ?>
+
             <!-- !subtotal section-->
         </div>
         <!--  !shopping cart items   -->

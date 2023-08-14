@@ -51,9 +51,9 @@
             <div class="col-sm-6">
                 <img src="<?php echo $item['ProductImage'] ?? "./assets/products/1.png" ?>" alt="product" class="img-fluid">
                 <div class="form-row pt-4 font-size-16 font-baloo">
-                    <div class="col">
+                    <!--<div class="col">
                         <button type="submit" class="btn btn-danger form-control">Proceed to Buy</button>
-                    </div>
+                    </div>-->
                     <div class="col">
                         <?php
                         $productIDsInCart = $product->getProductId($CartID, 'cart_items');
@@ -188,7 +188,7 @@
 
             </div>
 
-            <div class="col-12">
+            <div class="col-12" style="margin-top:50px;">
                 <h6 class="font-rubik">Product Description</h6>
                 <hr>
                 <p class="font-rale font-size-14"><?php echo $item['ProductDetails'] ?? ""; ?></p>
