@@ -141,18 +141,7 @@
                 </div>
             </li>
 
-            <li>
-                <div class="input-group" style="margin-left: 20px">
-                    <input type="text" id="searchInput" class="form-control" placeholder="Search Products">
-                    <input id="productID" hidden>
-                    <ul id="autocompleteResults" class="dropdown-menu" ></ul>
-                    <div class="input-group-append">
-                        <button class="btn btn-secondary" id="searchButton" type="button">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </li>
+       
 
             </ul>
 
