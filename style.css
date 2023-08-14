@@ -78,6 +78,7 @@ button, button:focus {
 #top-sale .owl-carousel .owl-nav button.owl-prev {
     left: 0;
 }
+
 #top-sale .owl-carousel .owl-nav button.owl-prev span,
 #top-sale .owl-carousel .owl-nav button.owl-next span {
     font-size: 35px;

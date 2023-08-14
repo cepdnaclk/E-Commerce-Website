@@ -27,10 +27,7 @@
             position: relative;
             display: inline-block;
         }
-        .text-white{
 
-            
-        }
 
         /* Style for the dropdown content */
         .dropdown-content {
@@ -131,7 +128,6 @@
                  <?php   }
 
                 ?>
-
             <li>
                 <div class="input-group" style="margin-left: 20px">
                     <input type="text" id="searchInput" class="form-control" placeholder="Search Products">
@@ -145,6 +141,8 @@
                 </div>
             </li>
 
+       
+
             </ul>
 
             <form action="#" class="font-size-14 font-rale">
@@ -152,7 +150,9 @@
                     <span class="font-size-16 px-2 text-white"><i class="fas fa-shopping-cart"></i></span>
                 </a>
 
+
                 <div class="dropdown">
+
 
                 <?php
                 if(isset($_SESSION['CustomerID'])){
